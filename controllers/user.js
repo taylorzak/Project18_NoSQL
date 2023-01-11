@@ -21,11 +21,45 @@ module.exports={
     },
     getallusers:async(request,response)=>{
         try{
-            const users=await User.find({})//.populate({path:"thoughts",select:"-__v"}).select("-__v").sort({_id:-1})
+            const users=await User.find({});//.populate({path:"thoughts",select:"-__v"}).select("-__v").sort({_id:-1})
             response.json(users)
         }
         catch(e){
             response.json(e)
         }
+    },
+getuserbyid:async(request,response)=>{
+    try{
+        const{userId}=request.params;
+        const user = await User.findById(userId)//.populate({path:"thoughts",select:"-__v"}).select("-__v").sort({_id:-1})
+        
+        response.json(user)
     }
+    catch(e){
+        response.json(e)
+    }
+},
+updateuserbyid:async(request,response)=>{
+    try{
+        const{userId}=request.params;
+        const body=request.body 
+        const user = await User.findByIdAndUpdate(userId,body,{new:true,runValidators:true})//.populate({path:"thoughts",select:"-__v"}).select("-__v").sort({_id:-1})
+        
+        response.json(user)
+    }
+    catch(e){
+        response.json(e)
+    }
+},
+deleteuserbyid:async(request,response)=>{
+    try{
+        const{userId}=request.params;
+        const user = await User.findByIdAndDelete(userId)//.populate({path:"thoughts",select:"-__v"}).select("-__v").sort({_id:-1})
+        
+        response.json(user)
+    }
+    catch(e){
+        response.json(e)
+    }
+},
 }
