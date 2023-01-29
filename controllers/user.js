@@ -21,8 +21,11 @@ module.exports={
     },
     getallusers:async(request,response)=>{
         try{
-            const users=await User.find({});//.populate({path:"thoughts",select:"-__v"}).select("-__v").sort({_id:-1})
-            response.json(users)
+            User.find({})//.populate({path:"thoughts",select:"-__v"}).select("-__v").sort({_id:-1})
+            .then(async(users)=>{
+                console.log(users)
+                response.json(users)
+            })
         }
         catch(e){
             response.json(e)

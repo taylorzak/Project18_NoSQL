@@ -1,5 +1,4 @@
 const {Schema,model}=require("mongoose")
-const moment=require("moment")
 
 const validateemail=(email)=>{
     let re= /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -17,7 +16,9 @@ const UserSchema=new Schema({
         type:String,
         unique:true,
         required:true,
-        validate:[validateemail,"please provide a valid email address"],
+        //validate:[validateemail,"please provide a valid email address"],
+        match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, 'Please enter a valid e-mail address']
+
     },
     thought:[
         {
